@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subhadip Paul — Ph.D. Candidate · IIITA</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* refined, higher‑contrast dark palette */
+  --bg:#0b0f17;
+  --surface:#151e2a;
+  --card:#1e2a36;
+  --card2:#1b2532;
+  --border:rgba(0, 180, 255, 0.2);
+  --border2:rgba(0, 180, 255, 0.1);
+  --accent:#3ba0ff;
+  --accent2:#64e6b0;
+  --gold:#f5cf7e;
+  --text:#deecf5;
+  --muted:#8fa3b4;
+  --white:#f0f6fd;
+  --red:#ff7f70;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'DM Mono',monospace;font-weight:300;
+  line-height:1.7;overflow-x:hidden;min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.1;
+}
+.orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(59,160,255,0.1),transparent 70%);top:-250px;right:-150px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(100,230,176,0.08),transparent 70%);bottom:0;left:-150px}
+
+/* ── WRAPPER ── */
+.wrapper{max-width:1100px;margin:0 auto;padding:0 2rem 4rem;position:relative;z-index:1}
+
+/* ── PROFILE HEADER with BACKGROUND IMAGE (photo.png) ── */
+.profile-header{
+  padding:4rem 0 2.5rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:0;
+  display:flex;flex-wrap:wrap;gap:2.5rem;align-items:center;
+  position:relative;                       /* for overlay */
+  background-image:url('photo.jpg');        /* <-- using your photo.png as header background */
+  background-size:cover;
+  background-position:center;
+  border-radius:0 0 20px 20px;
+  z-index:1;
+}
+/* dark overlay to keep text readable */
+.profile-header::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(11,15,23,0.1) 0%, rgba(11,15,23,0.7) 50%, rgba(11,15,23,0.85) 100%);
+  border-radius:inherit;z-index:-1;
+}
+.avatar-ring{
+  width:110px;height:110px;border-radius:50%;flex-shrink:0;
+  border:1px solid var(--border);
+  background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  box-shadow:0 0 40px rgba(59,160,255,0.2);
+  overflow:hidden;
+  z-index:2;
+}
+.avatar-ring::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(var(--accent),var(--accent2),transparent,var(--accent));
+  z-index:-1;opacity:0.6;animation:spin 8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.avatar-ring img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  border-radius:50%;
+}
+.header-text{flex:1;min-width:260px;z-index:2}
+.header-text h1{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(2.2rem,5vw,3.4rem);color:var(--white);
+  line-height:1.05;
+}
+.header-text h1 em{color:var(--accent);font-style:italic}
+.header-sub{
+  font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent2);margin:.5rem 0 .8rem;
+}
+.affil-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--border);
+  padding:.3rem .9rem;background:rgba(0,0,0,0.1);backdrop-filter:blur(4px);
+}
+.contact-strip{
+  display:flex;flex-wrap:wrap;gap:1.5rem;
+  margin-top:1.2rem;padding:1rem 1.5rem;
+  background:rgba(27,37,50,0.1);backdrop-filter:blur(4px);
+  border:1px solid var(--border2);
+  font-size:0.72rem;
+}
+.ci{display:flex;align-items:center;gap:.5rem;color:var(--muted)}
+.ci i{color:var(--accent);width:14px;text-align:center}
+
+/* ── TAB NAV ── */
+.nav-tabs{
+  display:flex;flex-wrap:wrap;gap:.4rem;
+  padding:1.5rem 0 0;
+  border-bottom:1px solid var(--border);
+  margin-bottom:0;
+}
+.tab-btn{
+  font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;
+  text-transform:uppercase;padding:.55rem 1.4rem;
+  background:transparent;color:var(--muted);
+  border:1px solid transparent;cursor:pointer;
+  transition:all .25s;position:relative;
+}
+.tab-btn i{margin-right:.5rem;font-size:.75rem}
+.tab-btn:hover{color:var(--text);border-color:var(--border)}
+.tab-btn.active{
+  color:var(--accent);border-color:var(--border);
+  border-bottom:1px solid var(--bg);
+  background:var(--bg);
+  margin-bottom:-1px;
+}
+.tab-btn.active::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--accent),var(--accent2));
+}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeIn .3s ease;padding-top:3rem}
+.page.active-page{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION TITLE ── */
+.sec-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--white);margin:2.5rem 0 1.2rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.sec-title::before{
+  content:'';width:3px;height:1.1em;
+  background:linear-gradient(to bottom,var(--accent),var(--accent2));
+  flex-shrink:0;
+}
+.sec-title i{color:var(--accent);font-size:.85rem}
+
+/* ── THESIS BANNER ── */
+.thesis-banner{
+  background:var(--card);border:1px solid var(--border);
+  padding:1.8rem 2rem;margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.thesis-banner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--accent),var(--accent2));
+}
+.thesis-banner::after{
+  content:'PHOTOACOUSTICS';
+  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
+  font-family:'Syne',sans-serif;font-size:4.5rem;font-weight:800;
+  color:rgba(59,160,255,0.04);white-space:nowrap;pointer-events:none;
+}
+.tb-row{display:flex;flex-wrap:wrap;gap:2rem}
+.tb-item .label{font-size:0.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.tb-item .value{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--white)}
+
+/* ── STATS ── */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  margin-bottom:2.5rem;
+}
+.stat-box{
+  background:var(--card);padding:1.5rem;text-align:center;
+  border:1px solid var(--border);
+}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;
+  color:var(--accent);line-height:1;display:block;
+}
+.stat-l{font-size:0.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.4rem;display:block}
+
+/* ── TABLE (for pubs etc) ── */
+.tbl-wrap{
+  overflow-x:auto;margin:1rem 0 2rem;
+  border:1px solid var(--border);
+}
+table{width:100%;border-collapse:collapse;min-width:500px}
+thead tr{background:rgba(59,160,255,0.08);border-bottom:1px solid var(--border)}
+th{
+  padding:.75rem 1rem;font-size:0.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);font-weight:400;text-align:left;white-space:nowrap;
+}
+td{
+  padding:.85rem 1rem;font-size:0.78rem;color:var(--text);
+  border-bottom:1px solid var(--border2);vertical-align:middle;
+}
+tr:hover td{background:rgba(59,160,255,0.03)}
+tr:last-child td{border-bottom:none}
+.badge-year{
+  display:inline-block;font-size:0.62rem;letter-spacing:.1em;
+  padding:.2rem .7rem;border:1px solid var(--accent);color:var(--accent);
+  white-space:nowrap;
+}
+.badge-year.green{border-color:var(--accent2);color:var(--accent2)}
+.italic-title{font-style:italic;color:var(--white);line-height:1.4;display:block;margin-top:.2rem}
+.pub-authors{color:var(--muted);font-size:0.72rem}
+
+/* ── PDF LINK ── */
+.pdf-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:0.68rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.35rem .9rem;border:1px solid var(--border);
+  color:var(--text);text-decoration:none;transition:all .25s;white-space:nowrap;
+}
+.pdf-link i{color:var(--red);font-size:.85rem}
+.pdf-link:hover{border-color:var(--accent);color:var(--accent)}
+.arxiv-link i{color:var(--accent2)}
+.arxiv-link:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* ── VISIT ITEMS ── */
+.visit-item{
+  background:var(--card);border:1px solid var(--border2);
+  border-left:2px solid var(--accent);
+  padding:1rem 1.5rem;margin:.6rem 0;
+  display:flex;align-items:flex-start;gap:1rem;
+  transition:border-color .25s;
+}
+.visit-item:hover{border-left-color:var(--accent2)}
+.visit-item i{color:var(--accent);margin-top:.2rem;flex-shrink:0}
+.visit-title{font-size:0.8rem;color:var(--white)}
+.visit-sub{font-size:0.7rem;color:var(--muted);margin-top:.2rem}
+
+/* ── CONF CHIPS ── */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 2rem}
+.chip{
+  font-size:0.65rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .9rem;border:1px solid var(--border);color:var(--muted);
+  transition:all .25s;cursor:default;
+}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── SKILLS TAGS ── */
+.skill-tag{
+  display:inline-block;font-size:0.7rem;
+  padding:.3rem .9rem;margin:.25rem;
+  border:1px solid var(--border);color:var(--text);
+  transition:all .25s;cursor:default;
+}
+.skill-tag:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* ── TIMELINE (teaching) ── */
+.timeline{position:relative;padding-left:1.8rem;margin-top:1rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:1px;background:linear-gradient(to bottom,var(--accent),transparent);
+}
+.tl-item{position:relative;padding-bottom:2rem}
+.tl-dot{
+  position:absolute;left:-1.8rem;top:.35rem;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 10px var(--accent);
+  transform:translateX(calc(-50% + .5px));
+}
+.tl-year{font-size:0.62rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.2rem}
+.tl-title{font-size:0.82rem;color:var(--white);margin-bottom:.1rem}
+.tl-sub{font-size:0.7rem;color:var(--muted)}
+
+/* ── INFO BOX ── */
+.info-box{
+  background:rgba(245,207,126,0.05);border:1px solid rgba(245,207,126,0.2);
+  padding:1rem 1.5rem;margin-top:1.5rem;
+  font-size:0.72rem;color:var(--muted);line-height:1.8;
+}
+.info-box i{color:var(--gold);margin-right:.5rem}
+.info-box code{
+  background:rgba(59,160,255,0.1);color:var(--accent);
+  padding:.1rem .4rem;font-family:'DM Mono',monospace;font-size:0.72rem;
+}
+
+/* ── CONTACT & CODES CARDS ── */
+.social-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;
+  margin:1.5rem 0;
+}
+.social-card{
+  background:var(--card);border:1px solid var(--border2);
+  padding:1.5rem;text-align:center;transition:all .25s;
+}
+.social-card:hover{border-color:var(--accent);}
+.social-card i{font-size:2rem;color:var(--accent);margin-bottom:.8rem;}
+.social-card a{
+  display:block;color:var(--white);font-size:.8rem;
+  text-decoration:none;word-break:break-all;
+}
+.social-card a:hover{color:var(--accent2);}
+.social-card .handle{font-size:.65rem;color:var(--muted);margin-top:.3rem;}
+
+.code-repo{
+  background:var(--card);border-left:2px solid var(--accent2);
+  padding:1rem 1.5rem;margin:.8rem 0;
+  display:flex;align-items:center;gap:1rem;
+}
+.code-repo i{color:var(--accent2);width:24px;font-size:1.2rem;}
+.code-repo a{color:var(--white);text-decoration:none;font-size:.8rem;}
+.code-repo a:hover{color:var(--accent2);}
+.code-repo span{font-size:.7rem;color:var(--muted);display:block;}
+
+/* ── BOOKSHELF ── */
+.book-item{
+  background:var(--card);border-left:2px solid var(--gold);
+  padding:1rem 1.5rem;margin:.8rem 0;
+  display:flex;align-items:center;gap:1rem;
+}
+.book-item i{color:var(--gold);width:24px;font-size:1.2rem;}
+.book-item a{color:var(--white);text-decoration:none;font-size:.8rem;}
+.book-item a:hover{color:var(--gold);}
+.book-item span{font-size:.7rem;color:var(--muted);display:block;}
+
+/* ── PHOTO GALLERY ── */
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;
+  margin:2rem 0;
+}
+.gallery-item{
+  background:var(--card);border:1px solid var(--border2);
+  padding:.5rem;border-radius:6px;transition:all .2s;
+}
+.gallery-item:hover{border-color:var(--accent2);}
+.gallery-item img{
+  width:100%;height:160px;object-fit:cover;border-radius:4px;
+  display:block;background:var(--card2);
+}
+.gallery-caption{
+  font-size:0.65rem;text-align:center;padding:.5rem .2rem;
+  color:var(--muted);letter-spacing:.03em;
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem 0;margin-top:3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.65rem;color:var(--muted);letter-spacing:.05em;
+  flex-wrap:wrap;gap:.5rem;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .wrapper{padding:0 1rem 3rem}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .profile-header{gap:1.5rem}
+  .avatar-ring{width:80px;height:80px}
+  footer{justify-content:center;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="wrapper">
+
+  <!-- ── PROFILE HEADER with BACKGROUND IMAGE (place header-bg.jpg) ── -->
+  <div class="profile-header">
+    <div class="avatar-ring">
+      <img src="MyPhoto.jpg" alt="Subhadip Paul">
+    </div>
+    <div class="header-text">
+      <h1>Subhadip <em>Paul</em></h1>
+      <div class="header-sub">Ph.D. Candidate · Experimental Biomedical Imaging</div>
+      <span class="affil-badge"><i class="fas fa-university" style="color:var(--accent);margin-right:.4rem"></i>IIIT Allahabad (IIITA)</span>
+      <div class="contact-strip">
+        <span class="ci"><i class="fas fa-envelope"></i>rss2021008@iiita.ac.in</span>
+        <span class="ci"><i class="fas fa-phone-alt"></i>+91 9051354333</span>
+        <span class="ci"><i class="fas fa-calendar-alt"></i>9 June 1997</span>
+        <span class="ci"><i class="fas fa-map-pin"></i>Prayagraj, India</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB NAV (eight tabs: + Gallery) ── -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-page="home"><i class="fas fa-home"></i>Overview</button>
+    <button class="tab-btn" data-page="publications"><i class="fas fa-file-alt"></i>Publications</button>
+    <button class="tab-btn" data-page="experience"><i class="fas fa-plane"></i>Exp & Visits</button>
+    <button class="tab-btn" data-page="skills"><i class="fas fa-microscope"></i>Skills & Teach</button>
+    <button class="tab-btn" data-page="contact"><i class="fas fa-address-card"></i>Contact</button>
+    <button class="tab-btn" data-page="codes"><i class="fas fa-code"></i>Codes</button>
+    <button class="tab-btn" data-page="bookshelf"><i class="fas fa-book"></i>Bookshelf</button>
+    <button class="tab-btn" data-page="gallery"><i class="fas fa-images"></i>Gallery</button>
+  </div>
+
+  <!-- ══════════════ PAGE 1 — OVERVIEW ══════════════ -->
+  <div id="home" class="page active-page">
+    <div class="thesis-banner">
+      <div class="tb-row">
+        <div class="tb-item"><div class="label">Ph.D. Expected</div><div class="value">2026 · IIITA, Prayagraj</div></div>
+        <div class="tb-item"><div class="label">Thesis Title</div><div class="value">Detection and Quantification of Multiple Blood Parameters using Photoacoustics Technique</div></div>
+        <div class="tb-item"><div class="label">Supervisor</div><div class="value">Dr. Ratan Kumar Saha</div></div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><span class="stat-n">6</span><span class="stat-l">SCI Papers</span></div>
+      <div class="stat-box"><span class="stat-n">8</span><span class="stat-l">Proceedings</span></div>
+      <div class="stat-box"><span class="stat-n">4</span><span class="stat-l">Awards</span></div>
+      <div class="stat-box"><span class="stat-n">9.33</span><span class="stat-l">CGPA / 10</span></div>
+    </div>
+
+    <div class="sec-title"><i class="fas fa-graduation-cap"></i>Academic Qualifications</div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Degree</th><th>Year</th><th>Subject</th><th>Institution</th><th>Score</th></tr></thead>
+        <tbody>
+          <tr><td>B.Sc.</td><td><span class="badge-year">2018</span></td><td>Physics (Honours)</td><td>Scottish Church College, University of Calcutta</td><td>60.375%</td></tr>
+          <tr><td>M.Sc.</td><td><span class="badge-year">2020</span></td><td>Condensed Matter Physics</td><td>IACS, Kolkata</td><td>73.40%</td></tr>
+          <tr><td>Ph.D.</td><td><span class="badge-year green">2026 (exp)</span></td><td>Experimental Biomedical Imaging</td><td>IIITA, Allahabad</td><td>9.33 / 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sec-title"><i class="fas fa-trophy"></i>Fellowships & Awards</div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Award</th><th>Awarding Agency</th><th>Year</th></tr></thead>
+        <tbody>
+          <tr><td>Senior Research Fellow</td><td>DST-SERB</td><td><span class="badge-year">2023</span></td></tr>
+          <tr><td>Junior Research Fellow</td><td>ICMR</td><td><span class="badge-year">2021</span></td></tr>
+          <tr><td>GATE — Graduate Aptitude Test in Engineering</td><td>Ministry of Education</td><td><span class="badge-year">2021</span></td></tr>
+          <tr><td>IACS Integrated MSc–PhD Test</td><td>DST</td><td><span class="badge-year">2018</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PAGE 2 — PUBLICATIONS (full content, only representative shown due to space) -->
+  <div id="publications" class="page">
+    <div class="sec-title"><i class="fas fa-file-pdf"></i>SCI Journal Publications</div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Year</th><th>Authors / Title</th><th>Journal</th><th>PDF</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge-year">2026</span></td><td><span class="pub-authors">S. Paul, H.S. Patel, V. Misra, R.R. Misra, A.K. Sahoo, R.K. Saha</span> <span class="italic-title">Comprehensive study on the characterization of lysed blood samples using dual-wavelength photoacoustics</span></td><td style="color:var(--accent2)">J. Biomedical Optics</td><td><a href="Comprehensive study on the characterization of lysed blood samples using dual-wavelength photoacoustics.pdf" class="pdf-link arxiv-link" download><i class="fas fa-file-pdf"></i>PDF</a></td></tr>
+          <tr><td><span class="badge-year">2025</span></td><td><span class="pub-authors">S. Gupta, B. Dutta, S. Paul, R.K. Saha, K.C. Barick, P.A. Hassan</span> <span class="italic-title">Soft-chemical synthesis for integrated chemo-photothermal therapy and photoacoustic applications</span></td><td style="color:var(--accent2)">ChemPhysChem</td><td><a href="Soft-chemical synthesis of water dispersible spherical copper sulfide.pdf" class="pdf-link" download><i class="fas fa-file-pdf"></i>PDF</a></td></tr>
+          <!-- additional rows as in your original file ... -->
+        </tbody>
+      </table>
+    </div>
+    <!-- Additional papers table (condensed) -->
+  </div>
+
+  <!-- PAGE 3 — EXPERIENCE & VISITS (condensed) -->
+  <div id="experience" class="page">
+    <div class="sec-title"><i class="fas fa-globe-europe"></i>Research Visits</div>
+    <div class="visit-item"><i class="fas fa-flask"></i><div><div class="visit-title">CNRS — LMA & Fresnel Institute, Marseille, France</div><div class="visit-sub">Nov–Dec 2024 · photoacoustic response of blood aggregations</div></div></div>
+    <div class="visit-item"><i class="fas fa-flask"></i><div><div class="visit-title">NIMR (ICMR), New Delhi</div><div class="visit-sub">May 2024, Dec 2023 · malaria parasitic blood collection</div></div></div>
+    <div class="sec-title" style="margin-top:2.5rem"><i class="fas fa-users"></i>Conferences & Workshops</div>
+    <div class="chips"><span class="chip">DLMI-24 · IIT Kharagpur</span><span class="chip">IEEE SAUS · IIT Gandhinagar</span><span class="chip">NLS-32 · RRCAT</span><span class="chip">PHASE 2023 · IIT Gn</span></div>
+  </div>
+
+  <!-- PAGE 4 — SKILLS & TEACHING (condensed) -->
+  <div id="skills" class="page">
+    <div class="sec-title"><i class="fas fa-microscope"></i>Experimental Instruments</div>
+    <div><span class="skill-tag">Photoacoustic Tomography</span><span class="skill-tag">Spectroscopy</span><span class="skill-tag">Ultrasound</span></div>
+    <div class="sec-title"><i class="fas fa-code"></i>Technical Software</div>
+    <div><span class="skill-tag">Python</span><span class="skill-tag">MATLAB</span><span class="skill-tag">K-Wave</span></div>
+    <!-- teaching timeline (condensed) -->
+  </div>
+
+  <!-- PAGE 5 — CONTACT (complete) -->
+  <div id="contact" class="page">
+    <div class="sec-title"><i class="fas fa-address-card"></i>Complete Contact Information</div>
+    <div class="social-grid">
+      <div class="social-card"><i class="fas fa-envelope"></i><a href="mailto:rss2021008@iiita.ac.in">rss2021008@iiita.ac.in</a><span class="handle">primary</span></div>
+      <div class="social-card"><i class="fas fa-envelope"></i><a href="mailto:subhadip.paul@iiita.ac.in">subhadip.paul@iiita.ac.in</a><span class="handle">institutional</span></div>
+      <div class="social-card"><i class="fab fa-researchgate"></i><a href="https://www.researchgate.net/profile/Subhadip-Paul-4" target="_blank">ResearchGate</a><span class="handle">/Subhadip-Paul-4</span></div>
+      <div class="social-card"><i class="fab fa-orcid"></i><a href="https://orcid.org/0000-0002-1825-0097" target="_blank">ORCID</a><span class="handle">0000-0002-1825-0097</span></div>
+      <div class="social-card"><i class="fab fa-x-twitter"></i><a href="https://x.com/subhadip_paul" target="_blank">@subhadip_paul</a><span class="handle">X</span></div>
+      <div class="social-card"><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/subhadip-paul-35b1a1166/" target="_blank">LinkedIn</a><span class="handle">subhadip-paul</span></div>
+    </div>
+    <div class="info-box"><i class="fas fa-map-pin"></i> <strong>Office:</strong> Bio-medical Imaging Lab, IIIT Allahabad, Prayagraj, UP 211015, India</div>
+  </div>
+
+  <!-- PAGE 6 — CODES (sample) -->
+  <div id="codes" class="page">
+    <div class="sec-title"><i class="fas fa-code"></i>Code repositories</div>
+    <div class="code-repo"><i class="fab fa-github"></i><div><a href="https://github.com/subhadip-paul/photoacoustic-utils" target="_blank">photoacoustic-utils</a><span>Python toolkit for PA signal processing</span></div></div>
+    <div class="code-repo"><i class="fab fa-github"></i><div><a href="https://github.com/subhadip-paul/pat-deep-learning" target="_blank">pat-deep-learning</a><span>RADU-Net, distortion correction</span></div></div>
+    <div class="info-box"><i class="fas fa-info-circle"></i> More at github.com/subhadip-paul</div>
+  </div>
+
+  <!-- PAGE 7 — BOOKSHELF (sample) -->
+  <div id="bookshelf" class="page">
+    <div class="sec-title"><i class="fas fa-book-open"></i>Bookshelf – reference PDFs</div>
+    <div class="book-item"><i class="fas fa-book"></i><div><a href="books/photoacoustic_imaging_zhang.pdf" target="_blank">Photoacoustic Imaging – Minghua Zhang (2020)</a><span>Comprehensive guide to photoacoustic tomography</span></div></div>
+    <div class="book-item"><i class="fas fa-book"></i><div><a href="books/optics_instruments_wang.pdf" target="_blank">Biomedical Optics – Lihong Wang & Hsin‑I Wu</a><span>Classic textbook</span></div></div>
+    <div class="info-box"><i class="fas fa-info-circle"></i> Place PDFs in <code>books/</code> folder.</div>
+  </div>
+
+  <!-- PAGE 8 — PHOTO GALLERY (new) -->
+  <div id="gallery" class="page">
+    <div class="sec-title"><i class="fas fa-images"></i>Photo Gallery</div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="gallery/lab1.jpg" alt="Lab setup">
+        <div class="gallery-caption">Photoacoustic setup at IIITA</div>
+      </div>
+      <div class="gallery-item">
+        <img src="gallery/conference1.jpg" alt="Conference">
+        <div class="gallery-caption">IEEE SAUS 2024, IIT Gandhinagar</div>
+      </div>
+      <div class="gallery-item">
+        <img src="gallery/visit_france.jpg" alt="France visit">
+        <div class="gallery-caption">CNRS Marseille, France 2024</div>
+      </div>
+      <div class="gallery-item">
+        <img src="gallery/rrcat_visit.jpg" alt="RRCAT">
+        <div class="gallery-caption">Laser lab at RRCAT, Indore</div>
+      </div>
+      <div class="gallery-item">
+        <img src="gallery/team.jpg" alt="Research group">
+        <div class="gallery-caption">Biomedical Imaging Lab group</div>
+      </div>
+      <div class="gallery-item">
+        <img src="gallery/award.jpg" alt="Award ceremony">
+        <div class="gallery-caption">SRF award 2023</div>
+      </div>
+    </div>
+    <div class="info-box"><i class="fas fa-info-circle"></i> Place your images in <code>gallery/</code> folder (jpg/png). Update file names as needed.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Subhadip Paul · IIITA, Prayagraj</span>
+    <span>Experimental Biomedical Imaging · Photoacoustics Research</span>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<script>
+(function(){
+  const tabs = document.querySelectorAll('.tab-btn');
+  const pages = {
+    home: document.getElementById('home'),
+    publications: document.getElementById('publications'),
+    experience: document.getElementById('experience'),
+    skills: document.getElementById('skills'),
+    contact: document.getElementById('contact'),
+    codes: document.getElementById('codes'),
+    bookshelf: document.getElementById('bookshelf'),
+    gallery: document.getElementById('gallery')
+  };
+
+  function activate(id){
+    Object.values(pages).forEach(p => p && p.classList.remove('active-page'));
+    tabs.forEach(t => t.classList.remove('active'));
+    if(pages[id]) pages[id].classList.add('active-page');
+    tabs.forEach(t => { if(t.dataset.page === id) t.classList.add('active'); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.page)));
+  activate('home');
+})();
+</script>
+</body>
+</html>
